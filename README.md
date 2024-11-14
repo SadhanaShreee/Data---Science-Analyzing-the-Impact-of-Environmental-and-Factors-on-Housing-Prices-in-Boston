@@ -23,6 +23,12 @@ boston_df=pd.read_csv(boston_url)
 # Importing required libraries for plotting
 import matplotlib.pyplot as plt
 
+# Define the Null and Alternate Hypotheses for the impact of 'DIS' on 'MEDV'
+
+# Null Hypothesis (H0): The distance to employment centers (DIS) has no effect on median home value (MEDV)
+# Alternate Hypothesis (H1): The distance to employment centers (DIS) has a significant effect on median home value (MEDV)
+
+
 # 1. Boxplot for "Median value of owner-occupied homes" (MEDV)
 plt.figure(figsize=(8,6))
 sns.boxplot(x=boston_df['MEDV'])
@@ -144,6 +150,20 @@ else:
     conclusion = "Fail to reject the null hypothesis. The weighted distance to employment centers does not significantly impact the median value of homes."
 
 summary, conclusion
+
+
+# Interpretation of the DIS coefficient
+effect_interpretation = (
+    f"The coefficient of DIS is {dis_coefficient:.3f}. This means that for every additional unit increase in "
+    f"weighted distance to the five Boston employment centers, the median value of owner-occupied homes changes "
+    f"by approximately {dis_coefficient:.3f} units. "
+    f"{'This effect is statistically significant.' if dis_p_value < alpha else 'This effect is not statistically significant.'}"
+)
+
+# Display results
+print(model.summary())
+print("\nConclusion:", conclusion)
+print("Effect Interpretation:", effect_interpretation)
 ```
 
 
